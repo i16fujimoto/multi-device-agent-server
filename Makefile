@@ -31,3 +31,11 @@ lint: ## Run lint
 .PHONY: lint/fix
 lint/fix: ## Run lint and fix
 	golangci-lint run --fix ./...
+
+# ==========================
+# Build
+# ==========================
+.PHONY: build-app
+build-app:
+	docker build -t go-app .
+	docker run -it --rm -v $(PWD):/go/src/app go-app
