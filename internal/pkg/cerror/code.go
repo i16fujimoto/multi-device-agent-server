@@ -28,6 +28,7 @@ const (
 	CreateExternalHTTPRequest
 	TimeLoadLocation
 	TimeParse
+	StorageAPI
 
 	ErrorCodeMax // to validate codeMap size
 )
@@ -57,6 +58,7 @@ var codeMap = map[Code]codeDetail{ //nolint: gochecknoglobals
 	CreateExternalHTTPRequest: {"Create external HTTP Request", http.StatusInternalServerError}, // HTTPリクエスト系のエラー
 	TimeLoadLocation:          {"Time", http.StatusInternalServerError},                         // タイムゾーンのロード時のエラー
 	TimeParse:                 {"Time parse", http.StatusInternalServerError},                   // 文字列を時間に変換しようとした時のエラー
+	StorageAPI:                {"Storage API", http.StatusInternalServerError},                  // ストレージAPIのエラー
 }
 
 func MapHTTPErrorToCode(httpStatusCode int) Code {
