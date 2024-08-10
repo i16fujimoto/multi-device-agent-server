@@ -19,10 +19,14 @@ type Handler interface {
 
 type handler struct {
 	conversationUC usecase.Conversation
+
+	logger *logger.Logger
 }
 
 func NewHandler(storageClient storagegw.StorageClient, logger *logger.Logger) Handler {
 	return &handler{
 		conversationUC: usecase.NewConversationUC(storageClient, time.Now, logger),
+
+		logger: logger,
 	}
 }

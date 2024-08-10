@@ -58,7 +58,7 @@ func main() {
 	// route
 	e.GET("/health", handler.GetHealth)
 
-	group := e.Group("/conversation")
+	group := e.Group("/conversations")
 	{
 		group.GET("", handler.ListDailyConversations)
 		group.POST("", handler.SaveConversation)
