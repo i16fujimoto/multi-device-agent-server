@@ -1,0 +1,17 @@
+# For development
+FROM golang:1.22.4
+
+ENV TZ=Asia/Tokyo
+
+ENV ROOT=/go/src/app
+ENV ENV=development
+
+WORKDIR ${ROOT}
+
+RUN go install github.com/air-verse/air@latest
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
+CMD ["air", "-c", ".air.toml"]
