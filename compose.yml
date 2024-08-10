@@ -1,0 +1,17 @@
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/go/src/app
+    # env_file:
+    #   - .env.local
+    environment:
+      GO111MODULE: "on"
+      PORT: 8080
+    ports:
+      - 8080:8080
