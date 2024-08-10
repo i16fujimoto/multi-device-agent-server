@@ -1,11 +1,11 @@
 package entity
 
 const (
-	DeviceIOS       = "ios"
-	DeviceAndroid   = "android"
-	DevicePC        = "pc"
-	DeviceWatch     = "watch"
-	DeviceHologram  = "hologram"
+	DeviceIOS      = "ios"
+	DeviceAndroid  = "android"
+	DevicePC       = "pc"
+	DeviceWatch    = "watch"
+	DeviceHologram = "hologram"
 )
 
 type Conversation struct {
