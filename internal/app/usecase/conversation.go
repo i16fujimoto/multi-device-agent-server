@@ -44,14 +44,14 @@ func (u *conversationUC) Save(ctx context.Context, device string, conversations 
 		return cerror.Wrap(err, "usecase")
 	}
 	if exist {
-		existConversation, err := u.find(ctx, bucket, objectPath)
+		existConversations, err := u.find(ctx, bucket, objectPath)
 		if err != nil {
 			u.logger.Error("Failed to find", logger.Fstring("package", "usecase"), logger.Ferror(err))
 
 			return cerror.Wrap(err, "usecase")
 		}
 
-		entities = append(existConversation, conversations...)
+		entities = append(entities, existConversations...)
 	}
 
 	entities = append(entities, conversations...)
