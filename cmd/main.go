@@ -17,6 +17,8 @@ import (
 	cmiddleware "github.com/multi-device-agent-server/internal/app/middleware"
 	"github.com/multi-device-agent-server/internal/app/ui"
 	"github.com/multi-device-agent-server/internal/pkg/cerror"
+	storagegw "github.com/multi-device-agent-server/internal/pkg/gateway/storage"
+	"github.com/multi-device-agent-server/internal/pkg/infrastructure/storage"
 	"github.com/multi-device-agent-server/internal/pkg/logger"
 	"github.com/multi-device-agent-server/internal/pkg/validator"
 )
@@ -29,8 +31,16 @@ func main() {
 	// Initialize logger
 	logger := logger.New()
 
+	// Storage
+	var storageClient storagegw.StorageClient
+	if config.IsLocal() {
+		storageClient = storage.NewFileStorage("./.filestorage")
+	} else {
+		storageClient = storage.New()
+	}
+
 	// handler
-	handler := ui.NewHandler()
+	handler := ui.NewHandler(storageClient, logger)
 
 	// server
 	e := echo.New()
@@ -47,6 +57,12 @@ func main() {
 
 	// route
 	e.GET("/health", handler.GetHealth)
+
+	group := e.Group("/conversation")
+	{
+		group.GET("", handler.ListDailyConversations)
+		group.POST("", handler.SaveConversation)
+	}
 
 	// Start server
 	go func() {

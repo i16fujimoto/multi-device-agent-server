@@ -65,7 +65,7 @@ func (s *FileStorageClient) Find(ctx context.Context, bucket, objectPath string)
 // Save オブジェクトを保存する
 func (s *FileStorageClient) Save(ctx context.Context, bucket, objectPath string, body []byte) error {
 	path := fmt.Sprintf("%s/%s/%s", s.BasePath, bucket, objectPath)
-	if err := os.MkdirAll(filepath.Dir(path), 0777); err != nil { //nolint:gomnd
+	if err := os.MkdirAll(filepath.Dir(path), 0o777); err != nil { //nolint:gomnd
 		return cerror.Wrap(
 			err,
 			"failed to create directory",
