@@ -13,6 +13,11 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
 
+<<<<<<< Updated upstream
+=======
+	"github.com/multi-device-agent-server/config"
+	cmiddleware "github.com/multi-device-agent-server/internal/app/middleware"
+>>>>>>> Stashed changes
 	"github.com/multi-device-agent-server/internal/app/ui"
 	"github.com/multi-device-agent-server/internal/pkg/cerror"
 	"github.com/multi-device-agent-server/internal/pkg/logger"
@@ -22,7 +27,11 @@ import (
 const httpAddr = ":8080"
 
 func main() {
+<<<<<<< Updated upstream
 	// env := config.GetEnv()
+=======
+	env := config.GetEnv()
+>>>>>>> Stashed changes
 
 	// Initialize logger
 	logger := logger.New()
@@ -39,6 +48,9 @@ func main() {
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format: "[echo] time=${time_rfc3339_nano}, method=${method}, uri=${uri}, status=${status}\n",
 	}))
+
+	e.Use(cmiddleware.NewCORSMiddleware())
+	e.Use(cmiddleware.NewBasicAuthMiddleware("api", env.BasicAuthPassword))
 
 	// route
 	e.GET("/health", handler.GetHealth)

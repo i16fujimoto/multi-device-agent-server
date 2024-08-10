@@ -4,6 +4,7 @@ go 1.22.4
 
 require (
 	github.com/go-playground/validator/v10 v10.22.0
+	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/labstack/echo/v4 v4.12.0
 	go.opentelemetry.io/otel/trace v1.28.0
 	go.uber.org/zap v1.27.0
