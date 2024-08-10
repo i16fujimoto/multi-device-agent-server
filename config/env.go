@@ -10,6 +10,7 @@ import (
 type Env struct {
 	AppEnv            string `envconfig:"APP_ENV" default:"local"`
 	BasicAuthPassword string `envconfig:"BASIC_AUTH_PASSWORD" default:"secret"`
+	BucketName        string `envconfig:"BUCKET_NAME" default:"local"`
 }
 
 var env Env

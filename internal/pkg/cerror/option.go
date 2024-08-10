@@ -105,3 +105,9 @@ func WithTimeLoadLocationCode() Option {
 		e.code = TimeLoadLocation
 	}
 }
+
+func WithStorageAPICode() Option {
+	return func(e *Error) {
+		e.code = StorageAPI
+	}
+}
